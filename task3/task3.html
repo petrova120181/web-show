@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Задание 3 — FlexBox галерея</title>
+
+  <!-- Подключаем ИМЕННО task3.css -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="task3.css">
+
+</head>
+<body>
+  <!-- Кнопка на главную -->
+  <a class="home-btn" href="../index.html">На главную</a>
+
+  <!-- FLEX-контейнер: 4 вертикальные колонки -->
+  <main class="gallery" aria-label="FlexBox Gallery">
+    <!-- 1: лиса -->
+    <a class="tile" href="#!" style="--img:url('./fox-1.png')">
+      <div class="caption">
+        <h3>Fennec</h3>
+        <p>fox</p>
+        <h4>india</h4>
+      </div>
+    </a>
+
+    <!-- 2: кит -->
+    <a class="tile" href="#!" style="--img:url('./whale-2.png')">
+      <div class="caption">
+        <h3>humpback</h3>
+        <p>whale</p>
+        <h4>south africa</h4>
+      </div>
+    </a>
+
+    <!-- 3: павиан -->
+    <a class="tile" href="#!" style="--img:url('./baboon-3.png')">
+      <div class="caption">
+        <h3>common brown</h3>
+        <p>baboon</p>
+        <h4>south africa</h4>
+      </div>
+    </a>
+
+    <!-- 4: олень (у тебя файл flex-1.png — используем его) -->
+    <a class="tile" href="#!" style="--img:url('./deer-4.png')">
+      <div class="caption">
+        <h3>spotted</h3>
+        <p>deer</p>
+        <h4>amazon</h4>
+      </div>
+    </a>
+  </main>
+
+  <!-- Скрипт клика-мигания -->
+  <script src="click-pulse.js"></script>
+</body>
+</html>

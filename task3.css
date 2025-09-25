@@ -1,0 +1,91 @@
+/* СБРОС + шрифт, как просил преподаватель */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins", sans-serif;
+}
+
+/* Палитра */
+:root{
+  --bg:#000; 
+  --text:#fff; 
+  --muted:#d0d0d0;
+  --divider:rgba(255,255,255,.06); /* тонкая светлая линия между колонками */
+}
+
+html,body{height:100%}
+body{background:var(--bg); color:var(--text)}
+
+/* 4 колонки ВСЕГДА в один ряд, на всю ширину и высоту экрана */
+.gallery{
+  display:flex;
+  flex-wrap:nowrap;   /* не переносим на вторую строку */
+  height:100vh;       /* вся галерея = экран */
+  gap:0;              /* без щелей */
+  overflow:visible;
+}
+
+/* Колонка/карточка */
+.tile{
+  position:relative;
+  display:block;
+  flex:0 0 25%;       /* ширина каждой колонки = 25% */
+  width:25%;
+  height:100vh;       /* ровно по экрану */
+  background-image:var(--img);
+  background-size:cover;          /* Заполняем колонку, края могут чуть обрезаться */
+  background-position:center;
+  background-repeat:no-repeat;
+  color:#fff; text-decoration:none;
+
+  /* тонкий разделитель между колонками */
+  border-left:3px solid var(--divider);
+  transform-origin:center center; /* масштаб из центра */
+  transition:transform .25s ease, border-color .2s ease;
+  z-index:0;
+}
+.tile:first-child{ border-left:none; }
+
+/* Затемнение как в референсе */
+.tile::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(0,0,0,.55) 20%, rgba(0,0,0,.15) 60%, rgba(0,0,0,0) 100%);
+  z-index:0; transition:.25s opacity;
+}
+.tile:hover::after{ opacity:.85 }
+
+/* ХОВЕР: симметричное увеличение по всему периметру */
+.tile:hover{
+  transform:scale(1.03);
+  border-left-color:transparent; /* прячем линию слева, чтобы не было «зазора» */
+  z-index:5;                     /* поверх соседей */
+}
+
+/* Подписи */
+.caption{
+  position:absolute; left:24px; right:24px; bottom:24px; z-index:1; line-height:1.05;
+}
+.caption h3{ margin:0 0 4px; font-weight:800; font-size:clamp(22px,3.2vw,42px) }
+.caption p { margin:0 0 10px; font-size:clamp(18px,2.6vw,32px) }
+.caption h4{ margin:0; color:var(--muted); font-size:clamp(12px,1.3vw,14px); text-transform:lowercase }
+
+/* Кнопка На главную */
+.home-btn{
+  position:fixed; left:16px; top:16px; z-index:10;
+  padding:10px 14px; border-radius:999px; text-decoration:none; color:#fff;
+  background:rgba(0,0,0,.55); border:1px solid #2a2a2a; backdrop-filter:blur(6px);
+  transition:.2s background,.2s transform;
+}
+.home-btn:hover{ background:rgba(0,0,0,.75); transform:translateY(-1px) }
+
+/* Клик-мигание (если используешь JS) */
+@keyframes pulseClick{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
+.tile.pulse{ animation:pulseClick .35s ease }
+@keyframes flash{from{opacity:0}50%{opacity:.8}to{opacity:0}}
+.tile .flash{
+  position:absolute; inset:0; pointer-events:none; z-index:2;
+  background:radial-gradient(ellipse at center, rgba(255,255,255,.35), rgba(255,255,255,0) 60%);
+  animation:flash .35s ease;
+}
